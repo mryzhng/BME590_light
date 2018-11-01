@@ -1,0 +1,37 @@
+Arduino software flowchart
+
+1. define global variables
+	- switch input pin
+	- led output pin
+	- flashing frequency (2Hz)
+
+2. setup() function
+	- initialize button off state = 0
+	- initialize press counter = 0 (no press, 1st press, 2nd press, 3rd press)
+
+3. OTHER FUNCTIONS:
+	interrupt (button press) function
+	when detect a button pressed:
+	- increment button press counter by one
+
+	press count = 0 function
+	sigh off
+
+	press count = 1 function
+	low light
+	
+	press count = 2 function
+	high light
+
+	press count = 3 function
+	flashing light @2Hz
+	
+	press count = 4 function
+	reset press count to 0 = off
+
+
+4. void loop()
+	- store a button off state and look for change in state
+	- if loop detected -> INTERRUPT
+	evaluate current press count
+	execute corresponding press count function
