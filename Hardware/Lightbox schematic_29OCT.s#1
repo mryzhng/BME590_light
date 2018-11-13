@@ -2131,6 +2131,14 @@ LED</description>
 <wire x1="152.4" y1="68.58" x2="152.4" y2="63.5" width="0.1524" layer="91"/>
 </segment>
 </net>
+<net name="N$7" class="0">
+<segment>
+<pinref part="U1" gate="G$1" pin="5V"/>
+<wire x1="127" y1="60.96" x2="129.54" y2="60.96" width="0.1524" layer="91"/>
+<wire x1="127" y1="60.96" x2="129.54" y2="60.96" width="0.1524" layer="91"/>
+<label x="129.54" y="60.96" size="1.778" layer="95"/>
+</segment>
+</net>
 <net name="GND" class="0">
 <segment>
 <wire x1="5.08" y1="73.66" x2="35.56" y2="73.66" width="0.1524" layer="91"/>
