@@ -1,7 +1,7 @@
 // use preprocessor directives to define constants in the code = will never change
 #define FLASH_RATE_HZ 2
-#define BUTTON_IN D1
-#define PWN_LED_OUT D11
+#define BUTTON_IN 2
+#define PWM_LED_OUT 11
 #define PWM_MAX 255
 
 // global variables representing "state" across all functions = can change 
@@ -14,27 +14,31 @@ int PWM_OUT = 0;                //brightness of LED
 
 // executed one-time at device startup
 void setup() {
-
-   attachInterrupt(BUTTON_IN, button_pushed, FALLING); // digitalPinToInterrupt(interruptPin) 
+  
+   Serial.begin(9600);
+   attachInterrupt(digitalPinToInterrupt(BUTTON_IN), button_pushed, RISING); // digitalPinToInterrupt(interruptPin) 
                                                        // falling: will change when button release happens
                                                        // define output (PWM) pin connected to LED
                                                        // falling = detect when i release
-  pinMode(BUTTON_IN, INPUT)
-  pinMode(PWN_LED_OUT, OUTPUT)
+  pinMode(BUTTON_IN, INPUT_PULLUP);
+  pinMode(PWM_LED_OUT, OUTPUT);
   
 }
 
 // continually-running loop
 // calls functions that are named as "actions"
 void loop(){
-
+    //Serial.println(digitalRead(BUTTON_IN));
+    Serial.println(operating_mode);
+    
     check_for_button_press();
 
     set_pwm_based_on_operating_mode();
 
     shine_led();
+}
 
-void set_pwn_based_on_operating_mode() {
+void set_pwm_based_on_operating_mode() { 
 
     switch (operating_mode) {
         case 0:
@@ -44,10 +48,10 @@ void set_pwn_based_on_operating_mode() {
             PWM_OUT = PWM_MAX;
             break;
         case 2:
-            PWN_OUT = PWM_MAX/2;
+            PWM_OUT = PWM_MAX/2;
             break;
         case 3:
-            PWN_OUT = PWM_MAX/4;
+            PWM_OUT = PWM_MAX/4;
             break;
         case 4:
             PWM_OUT = PWM_MAX;
@@ -59,11 +63,10 @@ void set_pwn_based_on_operating_mode() {
 
 void button_pushed() {
     BUTTON_PUSHED = true;
-
 }
 
 void flash_the_light() {
-  while(true)
+//  while(true)
     analogWrite(PWM_LED_OUT, PWM_MAX);   // turn the LED on (HIGH is the voltage level)
     delay(1000/FLASH_RATE_HZ);                         // wait for a second
     analogWrite(PWM_LED_OUT, 0);        // turn the LED off by making the voltage 0 (if this doesn't work try "LOW")
@@ -71,12 +74,12 @@ void flash_the_light() {
 }
 
 void shine_led() {
-    analogWrite(PWM_LED_OUT, PWM_0UT); //value comes from mode set by operating modes
+    analogWrite(PWM_LED_OUT, PWM_OUT); //value comes from mode set by operating modes
 }
 
 void check_for_button_press() {
     if (BUTTON_PUSHED == true) {
-      operating mode = operating mode + 1;
+      operating_mode = operating_mode + 1;
       if (operating_mode == 5) {
           operating_mode = 0;
       }
@@ -87,4 +90,4 @@ void check_for_button_press() {
     
     // set operating_mode
     // reset previous button press state, interrupt catch, etc.
-}
+
