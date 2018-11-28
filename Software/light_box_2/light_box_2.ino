@@ -31,10 +31,12 @@ void setup() {
 // continually-running loop
 // calls functions that are named as "actions"
 void loop(){
-    //Serial.println(BUTTON_IN);
+    int sensorValue = digitalRead(BUTTON_IN);
+
+    Serial.println(sensorValue);
     
     check_for_button_press();
-
+    
     set_pwm_based_on_operating_mode();
 
     shine_led();
@@ -50,13 +52,12 @@ void set_pwm_based_on_operating_mode() {
             PWM_OUT = PWM_MAX;
             break;
         case 2:
-            PWM_OUT = PWM_MAX/2;
+            PWM_OUT = PWM_MAX/5;
             break;
         case 3:
             PWM_OUT = PWM_MAX/10;
             break;
         case 4:
-            PWM_OUT = PWM_MAX;
             flash_the_light();
             //break;
     }
@@ -75,7 +76,7 @@ void check_for_button_press() {
 //      Serial.println(operating_mode);
 //      Serial.print("millis:"); 
 //      Serial.println(millis());
-
+/*
       if ((millis() - lastDebounceTime) > debounceDelay) {
         rise_count = rise_count + 1; 
         Serial.print("rise count:");
@@ -88,15 +89,17 @@ void check_for_button_press() {
       }
       
       lastDebounceTime = millis();
-      
+ */
+      operating_mode = operating_mode + 1;     
       if (operating_mode == 5) {
         operating_mode = 0;
       }
+    
     }
-
       BUTTON_PUSHED = false;
-
       delay(500);
+
+      //delay(500);
     }
     // set operating_mode
     // reset previous button press state, interrupt catch, etc.

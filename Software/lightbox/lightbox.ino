@@ -30,7 +30,8 @@ void setup() {
 // continually-running loop
 // calls functions that are named as "actions"
 void loop(){
-    Serial.println(BUTTON_IN);
+    int sensorValue = digitalRead(BUTTON_IN)
+    Serial.println(sensorValue);
     
     check_for_button_press();
 
