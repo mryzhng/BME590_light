@@ -12,7 +12,8 @@ bool BUTTON_PUSHED = false;
 int previous_button_state = 0;
 int PWM_OUT = 0;                //brightness of LED
 unsigned long lastDebounceTime = 0;  // the last time the output pin was toggled
-unsigned long debounceDelay = 500;    // the debounce time; increase if the output flickers
+unsigned long debounceDelay = 100;    // the debounce time; increase if the output flickers
+int rise_count = 0;
 
 // executed one-time at device startup
 void setup() {
@@ -30,7 +31,7 @@ void setup() {
 // continually-running loop
 // calls functions that are named as "actions"
 void loop(){
-    Serial.println(BUTTON_IN);
+    //Serial.println(BUTTON_IN);
     
     check_for_button_press();
 
@@ -68,21 +69,32 @@ void button_pushed() {
 
 void check_for_button_press() {
     if (BUTTON_PUSHED == true) {
+      Serial.print("last debounce time:"); 
       Serial.println(lastDebounceTime);
+      Serial.print("operating mode:"); 
       Serial.println(operating_mode);
+      Serial.print("millis:"); 
       Serial.println(millis());
-      Serial.println('-');
+
       if ((millis() - lastDebounceTime) > debounceDelay) {
-        operating_mode = operating_mode + 1;
-        lastDebounceTime = millis();
+        rise_count = rise_count + 1; 
+        Serial.print("rise count:");
+        Serial.println(rise_count);
+        Serial.println("---");
+        if (rise_count=4){
+          operating_mode = operating_mode + 1;
+        }
       }
+      
+      lastDebounceTime = millis();
+      
       if (operating_mode == 5) {
         operating_mode = 0;
       }
     }
 
       BUTTON_PUSHED = false;
-
+      rise_count = 0;
     }
     // set operating_mode
     // reset previous button press state, interrupt catch, etc.

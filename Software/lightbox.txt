@@ -12,7 +12,7 @@ bool BUTTON_PUSHED = false;
 int previous_button_state = 0;
 int PWM_OUT = 0;                //brightness of LED
 unsigned long lastDebounceTime = 0;  // the last time the output pin was toggled
-unsigned long debounceDelay = 500;    // the debounce time; increase if the output flickers
+unsigned long debounceDelay = 50;    // the debounce time; increase if the output flickers
 
 // executed one-time at device startup
 void setup() {
@@ -30,7 +30,8 @@ void setup() {
 // continually-running loop
 // calls functions that are named as "actions"
 void loop(){
-    Serial.println(BUTTON_IN);
+    Serial.println(digitalRead(BUTTON_IN));
+    Serial.println(operating_mode);
     
     check_for_button_press();
 
@@ -52,12 +53,12 @@ void set_pwm_based_on_operating_mode() {
             PWM_OUT = PWM_MAX/2;
             break;
         case 3:
-            PWM_OUT = PWM_MAX/10;
+            PWM_OUT = PWM_MAX/4;
             break;
         case 4:
             PWM_OUT = PWM_MAX;
             flash_the_light();
-            //break;
+            break;
     }
 
 }
@@ -66,37 +67,31 @@ void button_pushed() {
     BUTTON_PUSHED = true;
 }
 
-void check_for_button_press() {
-    if (BUTTON_PUSHED == true) {
-      Serial.println(lastDebounceTime);
-      Serial.println(operating_mode);
-      Serial.println(millis());
-      Serial.println('-');
-      if ((millis() - lastDebounceTime) > debounceDelay) {
-        operating_mode = operating_mode + 1;
-        lastDebounceTime = millis();
-      }
-      if (operating_mode == 5) {
-        operating_mode = 0;
-      }
-    }
-
-      BUTTON_PUSHED = false;
-
-    }
-    // set operating_mode
-    // reset previous button press state, interrupt catch, etc.
-
-
-void shine_led() {
-    analogWrite(PWM_LED_OUT, PWM_OUT); //value comes from mode set by operating modes
-}
-
-
 void flash_the_light() {
+//  while(true)
     analogWrite(PWM_LED_OUT, PWM_MAX);   // turn the LED on (HIGH is the voltage level)
     delay(1000/FLASH_RATE_HZ);                         // wait for a second
     analogWrite(PWM_LED_OUT, 0);        // turn the LED off by making the voltage 0 (if this doesn't work try "LOW")
     delay(1000/FLASH_RATE_HZ);                       // wait for a second
 }
 
+void shine_led() {
+    analogWrite(PWM_LED_OUT, PWM_OUT); //value comes from mode set by operating modes
+}
+
+void check_for_button_press() {
+    if (BUTTON_PUSHED == true) {
+      lastDebounceTime = millis();
+      if ((millis() - lastDebounceTime) > debounceDelay) {
+      operating_mode = operating_mode + 1;
+      }
+      if (operating_mode == 5) {
+          operating_mode = 0;
+      }
+      }
+
+      BUTTON_PUSHED = false;
+    }
+    
+    // set operating_mode
+    // reset previous button press state, interrupt catch, etc.
