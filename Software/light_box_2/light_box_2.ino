@@ -69,20 +69,21 @@ void button_pushed() {
 
 void check_for_button_press() {
     if (BUTTON_PUSHED == true) {
-      Serial.print("last debounce time:"); 
-      Serial.println(lastDebounceTime);
-      Serial.print("operating mode:"); 
-      Serial.println(operating_mode);
-      Serial.print("millis:"); 
-      Serial.println(millis());
+//      Serial.print("last debounce time:"); 
+//      Serial.println(lastDebounceTime);
+//      Serial.print("operating mode:"); 
+//      Serial.println(operating_mode);
+//      Serial.print("millis:"); 
+//      Serial.println(millis());
 
       if ((millis() - lastDebounceTime) > debounceDelay) {
         rise_count = rise_count + 1; 
         Serial.print("rise count:");
         Serial.println(rise_count);
         Serial.println("---");
-        if (rise_count=4){
+        if (rise_count==1){
           operating_mode = operating_mode + 1;
+          rise_count = 0;
         }
       }
       
@@ -94,7 +95,8 @@ void check_for_button_press() {
     }
 
       BUTTON_PUSHED = false;
-      rise_count = 0;
+
+      delay(500);
     }
     // set operating_mode
     // reset previous button press state, interrupt catch, etc.
