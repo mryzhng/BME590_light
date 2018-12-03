@@ -484,7 +484,7 @@ LED</description>
 <class number="0" name="default" width="0.508" drill="0">
 </class>
 </classes>
-<designrules name="default *">
+<designrules name="default">
 <description language="de">&lt;b&gt;EAGLE Design Rules&lt;/b&gt;
 &lt;p&gt;
 Die Standard-Design-Rules sind so gewählt, dass sie für 
@@ -502,15 +502,15 @@ design rules under a new name.</description>
 <param name="layerSetup" value="(1*16)"/>
 <param name="mtCopper" value="0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm"/>
 <param name="mtIsolate" value="1.5mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm"/>
-<param name="mdWireWire" value="20mil"/>
-<param name="mdWirePad" value="20mil"/>
-<param name="mdWireVia" value="20mil"/>
-<param name="mdPadPad" value="20mil"/>
-<param name="mdPadVia" value="20mil"/>
-<param name="mdViaVia" value="20mil"/>
-<param name="mdSmdPad" value="20mil"/>
-<param name="mdSmdVia" value="20mil"/>
-<param name="mdSmdSmd" value="20mil"/>
+<param name="mdWireWire" value="6mil"/>
+<param name="mdWirePad" value="6mil"/>
+<param name="mdWireVia" value="6mil"/>
+<param name="mdPadPad" value="6mil"/>
+<param name="mdPadVia" value="6mil"/>
+<param name="mdViaVia" value="6mil"/>
+<param name="mdSmdPad" value="6mil"/>
+<param name="mdSmdVia" value="6mil"/>
+<param name="mdSmdSmd" value="6mil"/>
 <param name="mdViaViaSameLayer" value="6mil"/>
 <param name="mnLayersViaInSmd" value="2"/>
 <param name="mdCopperDimension" value="40mil"/>
@@ -758,7 +758,7 @@ design rules under a new name.</description>
 <vertex x="104.14" y="1.27"/>
 <vertex x="104.14" y="97.79"/>
 </polygon>
-<wire x1="49.3522" y1="31.496" x2="50.8" y2="31.496" width="0.508" layer="16"/>
+<wire x1="49.3522" y1="31.496" x2="50.8" y2="31.496" width="0.1524" layer="16"/>
 <wire x1="63.5" y1="27.94" x2="50.8" y2="31.496" width="0.508" layer="1"/>
 <wire x1="63.5" y1="27.94" x2="64.77" y2="26.67" width="0.508" layer="1"/>
 <wire x1="64.77" y1="26.67" x2="64.77" y2="13.97" width="0.508" layer="1"/>
@@ -769,11 +769,12 @@ design rules under a new name.</description>
 <wire x1="71.12" y1="54.518046875" x2="71.12" y2="13.97" width="0.508" layer="1"/>
 <contactref element="BATT" pad="2"/>
 <via x="78.74" y="13.97" extent="1-16" drill="0.35"/>
-<wire x1="78.74" y1="21.59" x2="78.74" y2="13.97" width="0.508" layer="1"/>
-<wire x1="81.28" y1="27.94" x2="81.28" y2="26.67" width="0.508" layer="1"/>
-<wire x1="81.28" y1="26.67" x2="81.2546" y2="26.6446" width="0.508" layer="1"/>
-<wire x1="81.2546" y1="26.6446" x2="81.2546" y2="24.1046" width="0.508" layer="1"/>
-<wire x1="81.2546" y1="24.1046" x2="78.74" y2="21.59" width="0.508" layer="1"/>
+<wire x1="78.74" y1="25.4" x2="78.74" y2="13.97" width="0.508" layer="1"/>
+<wire x1="81.28" y1="27.94" x2="79.9846" y2="26.6446" width="0.508" layer="1"/>
+<wire x1="79.9846" y1="26.6446" x2="79.9846" y2="26.58626875" width="0.508" layer="1"/>
+<wire x1="79.9846" y1="26.58626875" x2="79.25553125" y2="25.8572" width="0.508" layer="1"/>
+<wire x1="79.25553125" y1="25.8572" x2="79.1972" y2="25.8572" width="0.508" layer="1"/>
+<wire x1="79.1972" y1="25.8572" x2="78.74" y2="25.4" width="0.508" layer="1"/>
 <wire x1="69.85" y1="7.62" x2="69.85" y2="13.97" width="0.508" layer="1"/>
 </signal>
 <signal name="+5V">
